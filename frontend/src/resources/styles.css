@@ -1,0 +1,108 @@
+/*
+    General
+*/
+
+body,
+html {
+  margin: 0 0;
+  height: 100%;
+}
+
+/*
+    Navbar
+*/
+
+.nav_header {
+  background: #306baf;
+  position: sticky;
+  top: 0;
+  height: 70px;
+  z-index: 2;
+}
+
+.nav_header::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.nav_container {
+  margin-left: 15em;
+  margin-right: 15em;
+}
+
+.brand {
+  padding: 2px 0;
+  float: left;
+}
+
+.nav_link_ {
+  color: white;
+  transition: all ease-in-out 250ms;
+}
+.nav_link_:hover {
+  color: rgba(243, 243, 243, 0.918);
+}
+
+nav {
+  float: right;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 70px;
+  padding-top: 26px;
+  position: relative;
+}
+
+.nav_link {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.nav_link:hover {
+  color: rgba(243, 243, 243, 0.918);
+}
+
+.nav_link:hover::before {
+  width: 100%;
+}
+
+.back_img {
+  background-image: url(./Homepage.jpg);
+
+  /* Full height */
+  min-height: calc(100vh - 70px);
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.home_btn_img {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: rgb(17, 63, 163);
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  transition: 0.3s ease-in-out all;
+}
+
+.home_btn_img:hover {
+  background-color: rgb(47, 85, 209);
+}
