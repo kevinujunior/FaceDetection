@@ -56,6 +56,9 @@ INSTALLED_APPS = [
     'social_login',
     
     
+    'image_app'
+    
+    
 ]
 
 SITE_ID = 1
