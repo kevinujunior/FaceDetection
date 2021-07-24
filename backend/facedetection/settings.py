@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','mamun-facedetector.herokuapp.com']
 
 
 # Application definition
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'whitenoise.runserver_nostatic',
     'social_django',
     'social_login',
     
@@ -63,7 +64,10 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
-
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = 'static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
@@ -75,6 +79,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -116,10 +121,10 @@ SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
 ]
 
 
-SOCIAL_AUTH_INSTAGRAM_KEY =   config('SOCIAL_AUTH_INSTAGRAM_KEY') 
-SOCIAL_AUTH_INSTAGRAM_SECRET = config('SOCIAL_AUTH_INSTAGRAM_SECRET')
-SOCIAL_AUTH_INSTAGRAM_EXTRA_DATA = [         ('user', 'user'),
-]
+# SOCIAL_AUTH_INSTAGRAM_KEY =   config('SOCIAL_AUTH_INSTAGRAM_KEY') 
+# SOCIAL_AUTH_INSTAGRAM_SECRET = config('SOCIAL_AUTH_INSTAGRAM_SECRET')
+# SOCIAL_AUTH_INSTAGRAM_EXTRA_DATA = [         ('user', 'user'),
+# ]
 
 
 SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = config('SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY')       
@@ -147,7 +152,7 @@ SOCIAL_AUTH_GITHUB_SECRET =  config('SOCIAL_AUTH_GITHUB_SECRET')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
