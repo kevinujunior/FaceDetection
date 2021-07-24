@@ -3,9 +3,10 @@ import { Switch, BrowserRouter, Route } from "react-router-dom";
 import Home from "./components/Home";
 import About from "./components/About";
 import ImgView from "./components/Imgupload";
-import Login from "./components/auth/Login";
-import Signup from "./components/auth/Signup";
+import Login from "./components/auth/login/Login";
+import Signup from "./components/auth/signup/Signup";
 import Navbar from "./components/Navbar";
+
 
 const App = () => {
   return (
