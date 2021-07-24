@@ -1,52 +1,44 @@
 import React from "react";
 import "../resources/styles.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <div className="nav_header">
       <div className="nav_container">
         <div className="brand">
-          <Link
-            to="/"
-            className="nav_link_"
-            style={{
-              fontFamily: "Lobster, cursive",
-              fontSize: "2.7em ",
-              textDecoration: "none",
-            }}
-          >
+          <Link to="/" className="nav_link">
             Face Detection
           </Link>
         </div>
         <nav>
           <ul>
             <li>
-              <Link
+              <NavLink
                 to="/about"
+                activeClassName="nav_active"
                 className="nav_link"
-                style={{ textDecoration: "none" }}
               >
                 About
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/login"
+                activeClassName="nav_active"
                 className="nav_link"
-                style={{ textDecoration: "none" }}
               >
-                login
-              </Link>
+                Login
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/signup"
+                activeClassName="nav_active"
                 className="nav_link"
-                style={{ textDecoration: "none" }}
               >
-                Signup
-              </Link>
+                Sign-up
+              </NavLink>
             </li>
           </ul>
         </nav>

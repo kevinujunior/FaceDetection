@@ -5,18 +5,22 @@ import About from "./components/About";
 import ImgView from "./components/Imgupload";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/imgupload" component={ImgView} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-      </Switch>
-    </BrowserRouter>
+    <div className="app">
+      <BrowserRouter>
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/upload" component={ImgView} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+        </Switch>
+      </BrowserRouter>
+    </div>
   );
 };
 

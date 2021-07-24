@@ -1,18 +1,12 @@
 import React from "react";
-import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
     <div>
-      <Navbar />
-      <div className="back_img">
-        <Link
-          to="/imgupload"
-          className="home_btn_img"
-          style={{ textDecoration: "none", fontSize: "20px" }}
-        >
-          Upload your Image
+      <div className="home_img">
+        <Link to="/upload" className="home_btn">
+          Upload your image
         </Link>
       </div>
     </div>

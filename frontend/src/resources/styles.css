@@ -2,10 +2,21 @@
     General
 */
 
+* {
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+}
+
 body,
 html {
   margin: 0 0;
   height: 100%;
+}
+
+/* App */
+
+.app {
+  min-height: 100vh;
 }
 
 /*
@@ -13,39 +24,43 @@ html {
 */
 
 .nav_header {
-  background: #306baf;
-  position: sticky;
-  top: 0;
-  height: 70px;
-  z-index: 2;
-}
-
-.nav_header::after {
-  content: "";
-  display: table;
-  clear: both;
+  width: 100%;
+  border-bottom: 4px solid #7700ff;
+  background: white;
 }
 
 .nav_container {
-  margin-left: 15em;
-  margin-right: 15em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 0;
 }
 
-.brand {
-  padding: 2px 0;
-  float: left;
+.nav_link {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.nav_link:hover {
+  color: #7700ff;
+  text-decoration: underline;
 }
 
-.nav_link_ {
-  color: white;
-  transition: all ease-in-out 250ms;
-}
-.nav_link_:hover {
-  color: rgba(243, 243, 243, 0.918);
+.nav_active {
+  color: #7700ff;
+  font-weight: 600;
 }
 
-nav {
-  float: right;
+.brand .nav_link {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.brand .nav_link:hover {
+  text-decoration: none;
 }
 
 nav ul {
@@ -57,52 +72,27 @@ nav ul {
 nav li {
   display: inline-block;
   margin-left: 70px;
-  padding-top: 26px;
   position: relative;
 }
 
-.nav_link {
-  color: white;
-  text-transform: uppercase;
-  font-weight: 600;
-}
+/* Home  */
 
-.nav_link:hover {
-  color: rgba(243, 243, 243, 0.918);
-}
-
-.nav_link:hover::before {
-  width: 100%;
-}
-
-.back_img {
-  background-image: url(./Homepage.jpg);
-
-  /* Full height */
-  min-height: calc(100vh - 70px);
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.home_btn_img {
+.home_img {
   position: absolute;
-  top: 30%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  background-color: rgb(17, 63, 163);
+}
+
+.home_btn {
+  background-color: #7700ff;
+  text-decoration: none;
   color: white;
-  font-size: 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
   padding: 12px 24px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
   text-align: center;
-  transition: 0.3s ease-in-out all;
-}
-
-.home_btn_img:hover {
-  background-color: rgb(47, 85, 209);
 }
