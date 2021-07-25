@@ -1,7 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 
 const Home = () => {
+  var history = useHistory();
+
+  useEffect(() => {
+    history.replace("/");
+  }, [history]);
   return (
     <div>
       <div className="home_img">

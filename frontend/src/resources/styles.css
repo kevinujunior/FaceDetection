@@ -108,7 +108,8 @@ nav li {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  border-radius: 10px;
+  /* border-radius: 10px; */
+  box-shadow: 10px 10px 0px #5900bf;
 }
 
 .login h2 {

@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const handleSubmit = () => {};
+  var history = useHistory();
 
+  useEffect(() => {
+    history.replace("/login");
+  }, [history]);
   return (
     <div className="login">
       <h2>Login Account</h2>
