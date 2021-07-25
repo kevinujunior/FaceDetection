@@ -17,6 +17,15 @@ const Register = () => {
         <input type="password" placeholder="Confirm Password" />
         <button type="submit">Sign-up</button>
       </form>
+      <span className="or">
+        <span>or connect with</span>
+      </span>
+      <div className="social">
+        <i className="bi bi-facebook"></i>
+        <i className="bi bi-google"></i>
+        <i className="bi bi-linkedin"></i>
+        <i className="bi bi-github"></i>
+      </div>
     </div>
   );
 };
