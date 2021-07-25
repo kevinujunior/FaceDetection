@@ -15,7 +15,7 @@ const ImgUpload = () => {
   };
 
   const handleRedirect = () => {
-    setRedirect(true);
+    if (img) setRedirect(true);
   };
 
   return (
