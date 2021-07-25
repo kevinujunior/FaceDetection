@@ -7,7 +7,7 @@ const Navbar = () => {
     <div className="nav_header">
       <div className="nav_container">
         <div className="brand">
-          <Link to="/" className="nav_link">
+          <Link to="/" className="nav_link nav_logo">
             Face Detection
           </Link>
         </div>

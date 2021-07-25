@@ -6,6 +6,7 @@ import ImgView from "./components/Imgupload";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Navbar from "./components/Navbar";
+import Response from "./components/Response";
 
 const App = () => {
   return (
@@ -13,11 +14,12 @@ const App = () => {
       <BrowserRouter>
         <Navbar />
         <Switch>
-          <Route exact path="/" component={Home} />
           <Route exact path="/about" component={About} />
           <Route exact path="/upload" component={ImgView} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
+          <Route exact path="/response" component={Response} />
+          <Route exact path="/" component={Home} />
         </Switch>
       </BrowserRouter>
     </div>
