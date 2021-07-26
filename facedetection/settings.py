@@ -55,9 +55,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'whitenoise.runserver_nostatic',
     'social_django',
+    'corsheaders',
+    
+    
+    
     'social_login',
-    
-    
     'image_app'
     
     
