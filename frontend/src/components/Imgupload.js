@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
+import axios from "axios";
 
 const ImgUpload = () => {
   const [img, setImg] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const [prevImg, setPrevImg] = useState("");
   var history = useHistory();
 
   useEffect(() => {
@@ -11,30 +13,53 @@ const ImgUpload = () => {
   }, [history]);
 
   const handleImage = (e) => {
-    setImg(URL.createObjectURL(e.target.files[0]));
+    setPrevImg(URL.createObjectURL(e.target.files[0]));
+    setImg(e.target.files[0]);
+    console.log(img);
   };
 
-  const handleRedirect = () => {
-    if (img) setRedirect(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (img) {
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      };
+      let data = new FormData();
+      data.append("photo", img, img.name);
+      const res = await axios.post(
+        "http://mamun-facedetector.herokuapp.com/images/images/",
+        data,
+        config
+      );
+      console.log(res);
+      setRedirect(true);
+    } else {
+      alert("Please provide an image");
+    }
   };
 
   return (
     <div className="imgUpload">
-      <div className="imgUpload_img">
-        {!img ? (
-          <div className="imgUpload_upload">
-            <input type="file" id="img_input" onChange={handleImage} />
-            <label for="img_input">Choose an image</label>
+      <form onSubmit={handleSubmit}>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <div className="imgUpload_img">
+            {!prevImg ? (
+              <div className="imgUpload_upload">
+                <input type="file" id="img_input" onChange={handleImage} />
+                <label htmlFor="img_input">Choose an image</label>
+              </div>
+            ) : (
+              <div className="imgUpload_show">
+                <img src={prevImg} alt="Preview" />
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="imgUpload_show">
-            <img src={img} alt="Preview" />
-          </div>
-        )}
-      </div>
-      <button className="imgUpload_button" onClick={handleRedirect}>
-        Do Magic
-      </button>
+          <input type="submit" className="imgUpload_button" />
+        </div>
+      </form>
+
       {redirect && <Redirect to="/response" />}
     </div>
   );
