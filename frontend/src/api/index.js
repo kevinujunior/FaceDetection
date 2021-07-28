@@ -53,19 +53,7 @@ export const postExistingAuth = (data, history) => {
     });
 };
 
-export const signout = () => {
-  if (typeof window !== "undefined") {
-    localStorage.removeItem("key");
-    axios
-      .get("https://mamun-facedetector.herokuapp.com/rest_auth/logout/")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }
-};
+
 
 const authenticate = (data, next) => {
   if (typeof window != undefined) {

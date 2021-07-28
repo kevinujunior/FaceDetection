@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../resources/styles.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Redirect } from "react-router-dom";
 import { isAuthenticated, signout } from "../api";
 
 const Navbar = () => {
@@ -12,8 +12,10 @@ const Navbar = () => {
   }, []);
 
   const logout = () => {
-    signout();
-    // window.location.reload();
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("key");
+    }
+    window.location.reload();
   };
 
   return (
