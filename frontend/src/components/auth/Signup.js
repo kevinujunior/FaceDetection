@@ -11,11 +11,14 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username && password && password === confirmPassword) {
-      postNewAuth({
-        username: username,
-        password1: password,
-        password2: confirmPassword,
-      });
+      postNewAuth(
+        {
+          username: username,
+          password1: password,
+          password2: confirmPassword,
+        },
+        history
+      );
     }
   };
 

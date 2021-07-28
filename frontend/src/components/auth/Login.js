@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { postExistingAuth } from "../../api";
 
-const Login = () => {
+const Login = ({ history }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username && password) {
-      postExistingAuth({
-        username: username,
-        password: password,
-      });
+      postExistingAuth(
+        {
+          username: username,
+          password: password,
+        },
+        history
+      );
     }
   };
   var history = useHistory();

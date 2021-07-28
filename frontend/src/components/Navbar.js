@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../resources/styles.css";
 import { Link, NavLink } from "react-router-dom";
+import { isAuthenticated, signout } from "../api";
 
 const Navbar = () => {
+  const [key, setKey] = useState(false);
+
+  useEffect(() => {
+    const mykey = isAuthenticated();
+    setKey(mykey);
+  }, []);
+
+  const logout = () => {
+    signout();
+    // window.location.reload();
+  };
+
   return (
     <div className="nav_header">
       <div className="nav_container">
@@ -22,24 +35,39 @@ const Navbar = () => {
                 About
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/login"
-                activeClassName="nav_active"
-                className="nav_link"
-              >
-                Login
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/signup"
-                activeClassName="nav_active"
-                className="nav_link"
-              >
-                Sign-up
-              </NavLink>
-            </li>
+            {key ? (
+              <li>
+                <NavLink
+                  to="/"
+                  activeClassName="nav_active"
+                  className="nav_link"
+                  onClick={logout}
+                >
+                  Logout
+                </NavLink>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <NavLink
+                    to="/login"
+                    activeClassName="nav_active"
+                    className="nav_link"
+                  >
+                    Login
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/signup"
+                    activeClassName="nav_active"
+                    className="nav_link"
+                  >
+                    Sign-up
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       </div>
