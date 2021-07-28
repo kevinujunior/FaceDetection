@@ -29,7 +29,7 @@ const ImgUpload = () => {
       let data = new FormData();
       data.append("photo", img, img.name);
       const res = await axios.post(
-        "http://mamun-facedetector.herokuapp.com/images/images/",
+        "https://mamun-facedetector.herokuapp.com/images/images/",
         data,
         config
       );

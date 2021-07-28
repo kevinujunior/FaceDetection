@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../resources/styles.css";
 import { Link, NavLink, Redirect } from "react-router-dom";
 import { isAuthenticated, signout } from "../api";
+import axios from "axios";
 
 const Navbar = () => {
   const [key, setKey] = useState(false);
@@ -11,10 +12,12 @@ const Navbar = () => {
     setKey(mykey);
   }, []);
 
-  const logout = () => {
+  const logout = async () => {
     if (typeof window !== "undefined") {
       localStorage.removeItem("key");
     }
+    // await axios.get("https://mamun-facedetector.herokuapp.com/logout");
+    // // console.log(res.data);
     window.location.reload();
   };
 
