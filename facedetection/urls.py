@@ -19,7 +19,7 @@ from rest_framework import routers
 from django.contrib.auth import views as auth_views
 from django.conf.urls import url
 from rest_framework_swagger.views import get_swagger_view
-from social_login.views  import FacebookLogin, GoogleLogin
+from social_login.views  import FacebookLogin, GithubLogin, GoogleLogin, LinkedinLogin
 
 schema_view = get_swagger_view(title='FaceDetection API')
 
@@ -36,7 +36,9 @@ urlpatterns = [
     path('documentation/', schema_view),
     path('images/', include('image_app.urls')),
     path('rest_auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
-    path('rest_auth/google/', GoogleLogin.as_view(), name='google_login')
+    path('rest_auth/google/', GoogleLogin.as_view(), name='google_login'),
+    path('rest_auth/github/', GithubLogin.as_view(), name='github_login'),
+    path('rest_auth/linkedin/', LinkedinLogin.as_view(), name='linkedin_login')
     
     
     # path('social_auth/', include('social_auth.urls'))
