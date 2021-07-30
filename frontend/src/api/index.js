@@ -1,5 +1,35 @@
 import axios from "axios";
 
+export const responseGoogle = async (response, history) => {
+  // console.log(response);
+  const res = await axios.post(
+    "https://mamun-facedetector.herokuapp.com/rest_auth/google/",
+    {
+      access_token: response.accessToken,
+    }
+  );
+  authenticate(res.data, () => {
+    console.log("Stored key locally");
+  });
+  history.push("/");
+  window.location.reload();
+};
+
+export const loginFb = async (response, history) => {
+  const res = await axios.post(
+    "https://mamun-facedetector.herokuapp.com/rest_auth/facebook/",
+    {
+      access_token: response.accessToken,
+    }
+  );
+  console.log(res.data);
+  authenticate(res.data, () => {
+    console.log("Stored key locally");
+  });
+  history.push("/");
+  window.location.reload();
+};
+
 export const postNewAuth = (data, history) => {
   const url =
     "https://mamun-facedetector.herokuapp.com/rest_auth/registration/";
@@ -52,8 +82,6 @@ export const postExistingAuth = (data, history) => {
       console.log(error.message);
     });
 };
-
-
 
 const authenticate = (data, next) => {
   if (typeof window != undefined) {
