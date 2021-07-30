@@ -22,29 +22,31 @@ const Login = () => {
     history.replace("/login");
   }, [history]);
   return (
-    <div className="login">
-      <h2>Login Account</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
-      </form>
-      <span className="or">or connect with</span>
-      <div className="social">
-        <i className="bi bi-facebook"></i>
-        <i className="bi bi-google"></i>
-        <i className="bi bi-linkedin"></i>
-        <i className="bi bi-github"></i>
+    <div className="login_container">
+      <div className="login">
+        <h2>Login Account</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button type="submit">Login</button>
+        </form>
+        <span className="or">or connect with</span>
+        <div className="social">
+          <i className="bi bi-facebook"></i>
+          <i className="bi bi-google"></i>
+          <i className="bi bi-linkedin"></i>
+          <i className="bi bi-github"></i>
+        </div>
       </div>
     </div>
   );

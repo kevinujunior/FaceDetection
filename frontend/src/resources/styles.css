@@ -34,7 +34,7 @@ html {
   align-items: center;
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 20px;
 }
 
 .nav_link {
@@ -63,25 +63,33 @@ html {
   text-decoration: none;
 }
 
-nav ul {
+.nav_header ul {
   margin: 0;
   padding: 0;
   list-style: none;
+  display: flex;
 }
 
-nav li {
+.nav_header li {
   display: inline-block;
-  margin-left: 70px;
-  position: relative;
+  margin-left: 20px;
+}
+
+.nav_burger {
+  display: none;
+}
+
+.nav_brand input {
+  display: none;
 }
 
 /* Home  */
 
 .home_img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .home_btn {
@@ -98,17 +106,18 @@ nav li {
 }
 
 /* Login */
+.login_container {
+  height: 90vh;
+  display: grid;
+  place-items: center;
+}
+
 .login {
   width: 400px;
   margin: 0 auto;
   padding: 20px 30px 10px 30px;
   background-color: rgb(233, 233, 233);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   text-align: center;
-  /* border-radius: 10px; */
   box-shadow: 10px 10px 0px #5900bf;
 }
 
@@ -156,10 +165,7 @@ nav li {
 .imgUpload {
   width: 800px;
   margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -249,4 +255,60 @@ nav li {
 .or {
   margin-bottom: 20px;
   display: block;
+}
+
+@media screen and (max-width: 500px) {
+  .nav_header {
+    position: relative;
+  }
+  .nav_container {
+    padding: 10px;
+    flex-direction: column;
+  }
+  .nav_logo {
+    letter-spacing: 1px;
+  }
+  .nav_burger {
+    display: block;
+  }
+  .nav_brand {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav_brand input[type="checkbox"] {
+    display: none;
+  }
+  .nav_burger i {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  .nav_header ul {
+    padding: 10px;
+  }
+  .nav_header ul li {
+    width: 100%;
+    padding: 10px 0;
+  }
+  .login {
+    width: unset;
+    max-width: 400px;
+  }
+  .imgUpload {
+    width: unset;
+    max-width: 400px;
+    flex-direction: column;
+  }
+  .imgUpload_img {
+    margin-right: 0;
+  }
+  .imgUpload_show {
+    padding: 0;
+  }
+  .imgUpload_show img {
+    max-width: 300px;
+    max-height: 400px;
+  }
 }
