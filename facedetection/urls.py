@@ -16,10 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path , include
 from rest_framework import routers
-from social_login.views import home, login
 from django.contrib.auth import views as auth_views
 from django.conf.urls import url
 from rest_framework_swagger.views import get_swagger_view
+from social_login.views  import FacebookLogin, GoogleLogin
 
 schema_view = get_swagger_view(title='FaceDetection API')
 
@@ -31,12 +31,12 @@ urlpatterns = [
     path('allauth/', include('allauth.urls')),
     path('allauth/accounts', include('allauth.account.urls')),
     path('api-auth/', include('rest_framework.urls')),
-    path("home/", home, name="home"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
-    path("login/", login, name="login"),
     path('social-auth/', include('social_django.urls', namespace="social")),
     path('documentation/', schema_view),
-    path('images/', include('image_app.urls'))
+    path('images/', include('image_app.urls')),
+    path('rest_auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
+    path('rest_auth/google/', GoogleLogin.as_view(), name='google_login')
     
     
     # path('social_auth/', include('social_auth.urls'))

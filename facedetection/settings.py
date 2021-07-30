@@ -49,18 +49,19 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'rest_auth.registration',
     'rest_auth',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
+    
     'whitenoise.runserver_nostatic',
     'social_django',
     'corsheaders',
     
     
-    
     'social_login',
-    'image_app'
+    'image_app',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
     
     
 ]
