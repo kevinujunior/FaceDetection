@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, BrowserRouter, Route } from "react-router-dom";
 import Home from "./components/Home";
 import About from "./components/About";
@@ -7,6 +7,7 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Navbar from "./components/Navbar";
 import Response from "./components/Response";
+import { isAuthenticated } from "./api";
 
 const App = () => {
   return (
