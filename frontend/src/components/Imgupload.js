@@ -41,27 +41,22 @@ const ImgUpload = () => {
   };
 
   return (
-    <div className="imgUpload">
-      <form onSubmit={handleSubmit}>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <div className="imgUpload_img">
-            {!prevImg ? (
-              <div className="imgUpload_upload">
-                <input type="file" id="img_input" onChange={handleImage} />
-                <label htmlFor="img_input">Choose an image</label>
-              </div>
-            ) : (
-              <div className="imgUpload_show">
-                <img src={prevImg} alt="Preview" />
-              </div>
-            )}
+    <form className="imgUpload" onSubmit={handleSubmit}>
+      <div className="imgUpload_img">
+        {!prevImg ? (
+          <div className="imgUpload_upload">
+            <input type="file" id="img_input" onChange={handleImage} />
+            <label htmlFor="img_input">Choose an image</label>
           </div>
-          <input type="submit" className="imgUpload_button" />
-        </div>
-      </form>
-
+        ) : (
+          <div className="imgUpload_show">
+            <img src={prevImg} alt="Preview" />
+          </div>
+        )}
+      </div>
+      <input type="submit" className="imgUpload_button" />
       {redirect && <Redirect to="/response" />}
-    </div>
+    </form>
   );
 };
 
