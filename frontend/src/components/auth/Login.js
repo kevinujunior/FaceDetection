@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, useHistory, Link } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { postExistingAuth } from "../../api";
+import { postExistingAuth, responseGoogle, loginFb } from "../../api";
 import GitHubLogin from "react-github-login";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
+import axios from "axios";
 
 const Login = ({ history }) => {
   const [username, setUsername] = useState("");
@@ -24,12 +25,12 @@ const Login = ({ history }) => {
   };
   var history = useHistory();
 
-  const responseGoogle = (response) => {
-    console.log(response);
+  const googleResponse = async (response) => {
+    responseGoogle(response, history);
   };
 
   const fbResponse = (response) => {
-    console.log(response);
+    loginFb(response, history);
   };
 
   useEffect(() => {
@@ -57,8 +58,8 @@ const Login = ({ history }) => {
       <GoogleLogin
         clientId="579043395450-e68o76r9cag3d8vcg625qld2uiai4o06.apps.googleusercontent.com"
         buttonText="LOGIN WITH GOOGLE"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
+        onSuccess={googleResponse}
+        onFailure={googleResponse}
       />
       <FacebookLogin
         textButton="LOGIN WITH FACEBOOK"
