@@ -11,14 +11,21 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username && password && password === confirmPassword) {
-      postNewAuth(
-        {
-          username: username,
-          password1: password,
-          password2: confirmPassword,
-        },
-        history
-      );
+      const regex = /^[a-zA-Z0-9_]{8,}[a-zA-Z]+[0-9]*$/;
+      if (regex.test(username) && regex.test(password)) {
+        postNewAuth(
+          {
+            username: username,
+            password1: password,
+            password2: confirmPassword,
+          },
+          history
+        );
+        alert("Signup successfully!");
+      } else
+        alert(
+          "Username or password is not valid! Both should-\n • contain atleast 8 alphanumeric characters\n • contain atleast one alphabet\n • numbers are optional."
+        );
     }
   };
 

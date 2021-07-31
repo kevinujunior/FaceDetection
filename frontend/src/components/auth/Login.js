@@ -14,16 +14,22 @@ const Login = ({ history }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username && password) {
-      postExistingAuth(
-        {
-          username: username,
-          password: password,
-        },
-        history
-      );
+      const regex = /^[a-zA-Z0-9_]{8,}[a-zA-Z]+[0-9]*$/;
+      if (regex.test(username) && regex.test(password)) {
+        postExistingAuth(
+          {
+            username: username,
+            password: password,
+          },
+          history
+        );
+        alert("Login successfully!");
+      } else
+        alert(
+          "Username or password is not valid! Both should-\n • contain atleast 8 alphanumeric characters\n • contain atleast one alphabet\n • numbers are optional."
+        );
     }
   };
-  var history = useHistory();
 
   const googleResponse = async (response) => {
     responseGoogle(response, history);
@@ -36,6 +42,7 @@ const Login = ({ history }) => {
   useEffect(() => {
     history.replace("/login");
   }, [history]);
+
   return (
     <div className="login_container">
       <div className="login">
