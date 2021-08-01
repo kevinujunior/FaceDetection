@@ -43,7 +43,7 @@ const Navbar = () => {
             value={check}
             onChange={() => setCheck(!check)}
           />
-          <label for="burger" className="nav_burger">
+          <label htmlFor="burger" className="nav_burger">
             <i
               className="bi bi-list nav_list"
               style={check ? { display: "none" } : { display: "block" }}
