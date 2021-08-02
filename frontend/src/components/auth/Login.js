@@ -118,7 +118,8 @@ const Login = ({ history }) => {
         clientId="86btbvrbgr0ax4"
         onFailure={handleFailure}
         onSuccess={handleSuccess}
-        redirectUri={`${window.location.origin}/linkedin`}
+    
+        redirectUri="http://localhost:3000/linkedin"
         renderElement={({ onClick, disabled }) => (
           <div className="social">
             <i
@@ -128,8 +129,8 @@ const Login = ({ history }) => {
             ></i>
           </div>
         )}
-        supportIE
-        redirectPath="/linkedin"
+        // supportIE
+        // redirectPath="/linkedin"
       />
           {/* <GitHubLogin
             clientId="5ab51f75942a9cbeb6fd"
