@@ -7,7 +7,8 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Navbar from "./components/Navbar";
 import Response from "./components/Response";
-// import { LinkedInPopUp } from "react-linkedin-login-oauth2";
+
+import { LinkedInPopUp } from "react-linkedin-login-oauth2";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/response" component={Response} />
+          <Route exact path="/linkedin" component={LinkedInPopUp} />
           <Route exact path="/" component={Home} />
           {/* <Route exact path="/linkedin" component={LinkedInPopUp} /> */}
         </Switch>

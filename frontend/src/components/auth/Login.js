@@ -58,6 +58,15 @@ const Login = ({ history }) => {
     console.log(res);
   };
 
+  // const Linkedin = () => {
+  const handleSuccess = (response) => {
+    console.log(response);
+  };
+
+  const handleFailure = (response) => {
+    console.log(response);
+  };
+
   return (
     <div className="login_container">
       <div className="login">
@@ -104,7 +113,24 @@ const Login = ({ history }) => {
               </div>
             )}
           />
-          <i className="bi bi-github" onClick={githubLogin}></i>
+          {/* <i className="bi bi-github" onClick={githubLogin}></i> */}
+          <LinkedIn
+        clientId="86btbvrbgr0ax4"
+        onFailure={handleFailure}
+        onSuccess={handleSuccess}
+        redirectUri={`${window.location.origin}/linkedin`}
+        renderElement={({ onClick, disabled }) => (
+          <div className="social">
+            <i
+              className="bi bi-linkedin"
+              onClick={onClick}
+              disabled={disabled}
+            ></i>
+          </div>
+        )}
+        supportIE
+        redirectPath="/linkedin"
+      />
           {/* <GitHubLogin
             clientId="5ab51f75942a9cbeb6fd"
             redirectUri="https://mamun-facedetector.herokuapp.com/"
