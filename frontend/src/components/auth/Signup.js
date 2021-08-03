@@ -3,8 +3,11 @@ import { useHistory } from "react-router-dom";
 import { postNewAuth, responseGoogle, loginFb } from "../../api";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import { useAlert } from "react-alert";
 
 const Register = () => {
+  const alert = useAlert();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -20,27 +23,24 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (username && password && password === confirmPassword) {
-      const regex = /^[a-zA-Z0-9_]{8,}[a-zA-Z]+[0-9]*$/;
-      if (regex.test(username) && regex.test(password)) {
-        postNewAuth(
-          {
-            username: username,
-            password1: password,
-            password2: confirmPassword,
-          },
-          history
-        );
-        alert("Signup successfully!");
-      } else
-        alert(
-          "Username or password is not valid! Both should-\n • contain atleast 8 alphanumeric characters\n • contain atleast one alphabet\n • numbers are optional."
-        );
+    if (!username || !password || !confirmPassword) {
+      alert.show("Please enter all the details", { type: "error" });
+    } else if (password !== confirmPassword || password.length < 8) {
+      alert.show("Passwords do not match");
     }
+
+    postNewAuth(
+      {
+        username: username,
+        password1: password,
+        password2: confirmPassword,
+      },
+      history
+    );
   };
 
   useEffect(() => {
-    history.replace("/signup");
+    history.push("/signup");
   }, [history]);
   return (
     <div className="login_container">

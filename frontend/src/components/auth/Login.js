@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Redirect, useHistory, Link } from "react-router-dom";
+import { useAlert } from "react-alert";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import {
   postExistingAuth,
@@ -9,30 +9,26 @@ import {
 } from "../../api";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import axios from "axios";
-import { LinkedIn } from "react-linkedin-login-oauth2";
 
 const Login = ({ history }) => {
+  const alert = useAlert();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username && password) {
-      const regex = /^[a-zA-Z0-9_]{8,}[a-zA-Z]+[0-9]*$/;
-      if (regex.test(username) && regex.test(password)) {
-        postExistingAuth(
-          {
-            username: username,
-            password: password,
-          },
-          history
-        );
-        alert("Login successfully!");
-      } else
-        alert(
-          "Username or password is not valid! Both should-\n • contain atleast 8 alphanumeric characters\n • contain atleast one alphabet\n • numbers are optional."
-        );
+      postExistingAuth(
+        {
+          username: username,
+          password: password,
+        },
+        history
+      );
+    } else {
+      alert.show("Please enter all the details", {
+        type: "error",
+      });
     }
   };
 
@@ -44,7 +40,7 @@ const Login = ({ history }) => {
     loginFb(response, history);
   };
   useEffect(() => {
-    history.replace("/login");
+    history.push("/login");
   }, [history]);
 
   // const Linkedin = () => {
@@ -99,21 +95,6 @@ const Login = ({ history }) => {
             render={(renderProps) => (
               <div className="social">
                 <i className="bi bi-facebook" onClick={renderProps.onClick}></i>
-              </div>
-            )}
-          />
-          <LinkedIn
-            clientId="86btbvrbgr0ax4"
-            onFailure={handleFailure}
-            onSuccess={handleSuccess}
-            redirectUri="http://localhost:3000/linkedin"
-            renderElement={({ onClick, disabled }) => (
-              <div className="social">
-                <i
-                  className="bi bi-linkedin"
-                  onClick={onClick}
-                  disabled={disabled}
-                ></i>
               </div>
             )}
           />

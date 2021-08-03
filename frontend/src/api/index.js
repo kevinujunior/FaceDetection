@@ -16,6 +16,7 @@ export const responseGoogle = async (response, history) => {
 };
 
 export const loginLinkedin = async (response, history) => {
+  console.log(response);
   const res = await axios.post(
     "https://mamun-facedetector.herokuapp.com/rest_auth/linkedin/",
     {
@@ -68,7 +69,7 @@ export const postNewAuth = (data, history) => {
       window.location.reload();
     })
     .catch((error) => {
-      console.log(error.message);
+      alert("Something went wrong, please try again");
     });
 };
 
@@ -94,7 +95,7 @@ export const postExistingAuth = (data, history) => {
       window.location.reload();
     })
     .catch((error) => {
-      console.log(error.message);
+      alert("Something went wrong, please try again");
     });
 };
 
