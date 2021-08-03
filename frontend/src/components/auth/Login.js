@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, useHistory, Link } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { postExistingAuth, responseGoogle, loginFb } from "../../api";
-import GitHubLogin from "react-github-login";
+import {
+  postExistingAuth,
+  responseGoogle,
+  loginFb,
+  loginLinkedin,
+} from "../../api";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import axios from "axios";
@@ -32,35 +36,20 @@ const Login = ({ history }) => {
     }
   };
 
-  const googleResponse = async (response) => {
+  const googleResponse = (response) => {
     responseGoogle(response, history);
   };
 
   const fbResponse = (response) => {
     loginFb(response, history);
   };
-
-  const onSuccess = (response) => {
-    console.log(response);
-  };
-  const onFailure = (response) => {
-    console.error(response);
-  };
   useEffect(() => {
     history.replace("/login");
   }, [history]);
 
-  const githubLogin = async () => {
-    const res = await axios.post(
-      "https://mamun-facedetector.herokuapp.com/rest_auth/github/",
-      { access_token: "Some token" }
-    );
-    console.log(res);
-  };
-
   // const Linkedin = () => {
   const handleSuccess = (response) => {
-    console.log(response);
+    loginLinkedin(response, history);
   };
 
   const handleFailure = (response) => {
@@ -113,38 +102,22 @@ const Login = ({ history }) => {
               </div>
             )}
           />
-          {/* <i className="bi bi-github" onClick={githubLogin}></i> */}
           <LinkedIn
-        clientId="86btbvrbgr0ax4"
-        onFailure={handleFailure}
-        onSuccess={handleSuccess}
-    
-        redirectUri="http://localhost:3000/linkedin"
-        renderElement={({ onClick, disabled }) => (
-          <div className="social">
-            <i
-              className="bi bi-linkedin"
-              onClick={onClick}
-              disabled={disabled}
-            ></i>
-          </div>
-        )}
-        // supportIE
-        // redirectPath="/linkedin"
-      />
-          {/* <GitHubLogin
-            clientId="5ab51f75942a9cbeb6fd"
-            redirectUri="https://mamun-facedetector.herokuapp.com/"
-            onSuccess={onSuccess}
-            onFailure={onFailure}
-          /> */}
+            clientId="86btbvrbgr0ax4"
+            onFailure={handleFailure}
+            onSuccess={handleSuccess}
+            redirectUri="http://localhost:3000/linkedin"
+            renderElement={({ onClick, disabled }) => (
+              <div className="social">
+                <i
+                  className="bi bi-linkedin"
+                  onClick={onClick}
+                  disabled={disabled}
+                ></i>
+              </div>
+            )}
+          />
         </div>
-        {/* <div className="social">
-          <i className="bi bi-facebook"></i>
-          <i className="bi bi-google"></i>
-          <i className="bi bi-linkedin"></i>
-          <i className="bi bi-github"></i>
-        </div> */}
       </div>
     </div>
   );

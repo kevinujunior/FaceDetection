@@ -15,6 +15,21 @@ export const responseGoogle = async (response, history) => {
   window.location.reload();
 };
 
+export const loginLinkedin = async (response, history) => {
+  const res = await axios.post(
+    "https://mamun-facedetector.herokuapp.com/rest_auth/linkedin/",
+    {
+      access_token: response.code,
+    }
+  );
+  console.log(res.data);
+  authenticate(res.data, () => {
+    console.log("Stored key locally");
+  });
+  history.push("/");
+  window.location.reload();
+};
+
 export const loginFb = async (response, history) => {
   const res = await axios.post(
     "https://mamun-facedetector.herokuapp.com/rest_auth/facebook/",
