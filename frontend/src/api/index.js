@@ -66,10 +66,11 @@ export const postNewAuth = (data, history) => {
         console.log("Stored key locally");
       });
       history.push("/");
+      alert("Registration successful");
       window.location.reload();
     })
     .catch((error) => {
-      alert("Something went wrong, please try again");
+      alert("Either username already exists or the password is weak");
     });
 };
 
@@ -92,10 +93,12 @@ export const postExistingAuth = (data, history) => {
         console.log("Stored key locally");
       });
       history.push("/");
+      alert("Logged in successfully");
+
       window.location.reload();
     })
     .catch((error) => {
-      alert("Something went wrong, please try again");
+      alert("Invalid credentials");
     });
 };
 

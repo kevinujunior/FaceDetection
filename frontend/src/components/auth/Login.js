@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useAlert } from "react-alert";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import {
   postExistingAuth,
@@ -11,7 +10,6 @@ import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 const Login = ({ history }) => {
-  const alert = useAlert();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,9 +24,7 @@ const Login = ({ history }) => {
         history
       );
     } else {
-      alert.show("Please enter all the details", {
-        type: "error",
-      });
+      alert("Please enter all the details");
     }
   };
 
