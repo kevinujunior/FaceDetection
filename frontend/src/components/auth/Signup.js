@@ -25,10 +25,6 @@ const Register = () => {
       alert("Please enter all the details", { type: "error" });
     } else if (password !== confirmPassword) {
       alert("Passwords do not match");
-    } else if (password.length < 8) {
-      alert(
-        "Password must be greater than 8 characters and must contain numbers, alphabets and special characters"
-      );
     } else {
       postNewAuth(
         {

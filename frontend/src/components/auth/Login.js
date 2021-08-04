@@ -24,6 +24,7 @@ const Login = ({ history }) => {
         history
       );
     } else {
+      
       alert("Please enter all the details");
     }
   };

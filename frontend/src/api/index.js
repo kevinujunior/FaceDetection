@@ -70,7 +70,12 @@ export const postNewAuth = (data, history) => {
       window.location.reload();
     })
     .catch((error) => {
-      alert("Either username already exists or the password is weak");
+      if (error.response.data.username) {
+        alert(error.response.data.username);
+      }
+      if (error.response.data.password1) {
+        alert(error.response.data.password1);
+      }
     });
 };
 
@@ -98,7 +103,9 @@ export const postExistingAuth = (data, history) => {
       window.location.reload();
     })
     .catch((error) => {
-      alert("Invalid credentials");
+      for (var err in error.response.data.non_field_errors) {
+        alert(error.response.data.non_field_errors[err]);
+      }
     });
 };
 
