@@ -19,7 +19,7 @@ function Response(props) {
   // useEffect(() => {
   //   history.replace("/response");
   // }, [history]);
-	const image = props.location.state;
+  const image = props.location.state;
   
   const webcamRef = React.useRef(null);
   const [videoWidth,setVideoWidth] = useState(960);
@@ -128,13 +128,13 @@ function Response(props) {
                 id="myCanvas"
                 width={videoWidth}
                 height={videoHeight}
-                style={{backgroundColor: "transparent",width: "70%",}}
-                
+                style={{backgroundColor: "transparent",
+                         width: "70%",}}
               />
             </div>
             <div style={{ position: "absolute", top: "30%", left: "30%",}}>
-                
-                  <Webcam
+
+              <Webcam
                 audio={false}
                 id="img"
                 style={{
@@ -153,10 +153,8 @@ function Response(props) {
 
 export default Response;
 
-// <img 
-//                   src={image}
-//                   id="img"
-//                   ref={webcamRef}
-//                   screenshotQuality={1}
-//                   screenshotFormat="image/jpeg"
-//                   alt="Response"/>
+
+              // <img 
+              //   src={image}
+              //   id="img"
+              //   alt="Response"/>
