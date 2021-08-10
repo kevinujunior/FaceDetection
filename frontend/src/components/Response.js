@@ -132,13 +132,18 @@ function Response(props) {
               />
             </div>
             <div style={{ position: "absolute", top: "30%", left: "30%",}}>
-                <img 
-                  src={image}
-                  id="img"
-                  ref={webcamRef}
-                  screenshotQuality={1}
-                  screenshotFormat="image/jpeg"
-                  alt="Response"/>
+                
+                  <Webcam
+                audio={false}
+                id="img"
+                style={{
+                  width: "70%",
+                }}
+                ref={webcamRef}
+                screenshotQuality={1}
+                screenshotFormat="image/jpeg"
+                videoConstraints={videoConstraints}
+                />
             </div>
           </div>
     </div>
@@ -147,14 +152,10 @@ function Response(props) {
 
 export default Response;
 
-// <Webcam
-//                 audio={false}
-//                 id="img"
-//                 style={{
-//                   width: "70%",
-//                 }}
-//                 ref={webcamRef}
-//                 screenshotQuality={1}
-//                 screenshotFormat="image/jpeg"
-//                 videoConstraints={videoConstraints}
-//                 />
+// <img 
+//                   src={image}
+//                   id="img"
+//                   ref={webcamRef}
+//                   screenshotQuality={1}
+//                   screenshotFormat="image/jpeg"
+//                   alt="Response"/>
