@@ -128,7 +128,8 @@ function Response(props) {
                 id="myCanvas"
                 width={videoWidth}
                 height={videoHeight}
-                style={{backgroundColor: "transparent",}}
+                style={{backgroundColor: "transparent",width: "70%",}}
+                
               />
             </div>
             <div style={{ position: "absolute", top: "30%", left: "30%",}}>
