@@ -19,7 +19,7 @@ function Response(props) {
   // useEffect(() => {
   //   history.replace("/response");
   // }, [history]);
-  const image = props.location.state;
+	const image = props.location.state;
   
   const webcamRef = React.useRef(null);
   const [videoWidth,setVideoWidth] = useState(960);
@@ -54,8 +54,8 @@ function Response(props) {
     ctx.clearRect(
       0,
       0,
-      webcamRef.current.video.videoWidth,
-      webcamRef.current.video.videoHeight
+      "300px",
+      "300px"
       );
     if(predictions.length > 0) { //predictions.length represent no of objects
       console.log(predictions)
@@ -126,25 +126,21 @@ function Response(props) {
             <div style={{ position: "absolute", top: "30%", left: "30%", zIndex: "9999"}}>
               <canvas
                 id="myCanvas"
-                width={videoWidth}
-                height={videoHeight}
+                width="300px"
+                height="300px"
                 style={{backgroundColor: "transparent",
                          width: "70%",}}
               />
             </div>
             <div style={{ position: "absolute", top: "30%", left: "30%",}}>
 
-              <Webcam
-                audio={false}
+              <img 
+                src={image}
                 id="img"
-                style={{
-                  width: "70%",
-                }}
-                ref={webcamRef}
-                screenshotQuality={1}
-                screenshotFormat="image/jpeg"
-                videoConstraints={videoConstraints}
-                />
+                height="300px"
+                width="300px"
+                alt="Response"/>
+              
             </div>
           </div>
     </div>
@@ -152,9 +148,15 @@ function Response(props) {
 }
 
 export default Response;
+// <Webcam
+//                 audio={false}
+//                 id="img"
+//                 style={{
+//                   width: "70%",
+//                 }}
+//                 ref={webcamRef}
+//                 screenshotQuality={1}
+//                 screenshotFormat="image/jpeg"
+//                 videoConstraints={videoConstraints}
+//                 />
 
-
-              // <img 
-              //   src={image}
-              //   id="img"
-              //   alt="Response"/>
