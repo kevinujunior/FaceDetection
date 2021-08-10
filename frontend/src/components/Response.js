@@ -13,6 +13,7 @@ import {
 import * as cocoSsd from "@tensorflow-models/coco-ssd";
 import * as tf from "@tensorflow/tfjs";
 import Webcam from "react-webcam";
+import loadingimage from './images/loading.gif'
 
 function Response(props) {
   var history = useHistory();  
@@ -20,6 +21,7 @@ function Response(props) {
   //   history.replace("/response");
   // }, [history]);
 	const image = props.location.state;
+  const [loadingString, setLoadingString]=useState("");
   
   const webcamRef = React.useRef(null);
   const [videoWidth,setVideoWidth] = useState(960);
@@ -30,9 +32,12 @@ function Response(props) {
   async function loadModel() {
     try{
       console.log("model loading");
+      setLoadingString("model loading");
+      overlayOn();
       const model = await cocoSsd.load();
       setModel(model);
       console.log("setloaded model");
+      overlayOff();
     }catch(err){
       console.log(err);
       console.log("failed loading model");
@@ -46,6 +51,17 @@ function Response(props) {
     } )
   },[]);
 
+
+  // OVERLAY
+  function overlayOn() {
+    document.getElementById("overlay").style.display = "block";
+  }
+
+  function overlayOff() {
+    document.getElementById("overlay").style.display = "none";
+  }
+
+  //Prediction
   async function predictionFunction() {
     const predictions = await model.detect(document.getElementById("img"));
 
@@ -54,11 +70,13 @@ function Response(props) {
     ctx.clearRect(
       0,
       0,
-      "300px",
-      "300px"
+      "100vw",
+      "100vh"
       );
     if(predictions.length > 0) { //predictions.length represent no of objects
       console.log(predictions)
+      setLoadingString("detecting image");
+      overlayOn();
       for (let n = 0; n < predictions.length; n++){
         console.log(n);
         if(predictions[n].score > 0.8) {
@@ -95,8 +113,10 @@ function Response(props) {
           console.log("detected");
         }
       }
+      overlayOff();
+      
     }
-    setTimeout(() =>predictionFunction(), 500);
+    // setTimeout(() =>predictionFunction(), 500);
   }
 
   const videoConstraints = {
@@ -107,6 +127,15 @@ function Response(props) {
   };
 
   return (
+    <div>
+    <div id="overlay">
+        <div id="overlay_image">
+          <img src={loadingimage}/>
+          </div>
+          <div id="overlay_text">
+            {loadingString}
+        </div>
+    </div>
     <div className="response">
       <h2>Response page</h2>
           <Button
@@ -122,27 +151,23 @@ function Response(props) {
               }}>
               Start Detect
           </Button>
-          <div className="imgUpload_show" style={{maxWidth: "700px",}}>
-            <div style={{ position: "absolute", top: "30%", left: "30%", zIndex: "9999"}}>
+          <div className="imgUpload_show">
+            <div style={{ position: "absolute", top: "30%", left: "30%", zIndex: "99",height:"100vh",width:"100vw"}}>
               <canvas
                 id="myCanvas"
-                width="300px"
-                height="300px"
-                style={{backgroundColor: "transparent",
-                         width: "70%",}}
+                style={{backgroundColor: "transparent"}}
               />
             </div>
-            <div style={{ position: "absolute", top: "30%", left: "30%",}}>
+            <div style={{ position: "absolute", top: "30%", left: "30%", height: "100vh", width: "100vw"}}>
 
               <img 
                 src={image}
                 id="img"
-                height="300px"
-                width="300px"
                 alt="Response"/>
               
             </div>
           </div>
+    </div>
     </div>
   );
 }
