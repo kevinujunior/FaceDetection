@@ -17,10 +17,10 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route exact path="/about" component={About} />
-          <Route exact path="/upload" component={ImgView} />
+          <Route exact path="/upload" component={ImgView}  />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
-          <Route exact path="/response" component={Response} />
+          <Route exact path="/response"  render={(props) => <Response {...props}/>}/>
           <Route exact path="/linkedin" component={LinkedInPopUp} />
           <Route exact path="/" component={Home} />
           {/* <Route exact path="/linkedin" component={LinkedInPopUp} /> */}

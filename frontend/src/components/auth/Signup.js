@@ -6,6 +6,8 @@ import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props
 import { useAlert } from "react-alert";
 
 const Register = () => {
+  const alert = useAlert();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -22,19 +24,19 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!username || !password || !confirmPassword) {
-      alert("Please enter all the details", { type: "error" });
-    } else if (password !== confirmPassword) {
-      alert("Passwords do not match");
-    } else {
-      postNewAuth(
-        {
-          username: username,
-          password1: password,
-          password2: confirmPassword,
-        },
-        history
-      );
+      alert.show("Please enter all the details", { type: "error" });
+    } else if (password !== confirmPassword || password.length < 8) {
+      alert.show("Passwords do not match");
     }
+
+    postNewAuth(
+      {
+        username: username,
+        password1: password,
+        password2: confirmPassword,
+      },
+      history
+    );
   };
 
   useEffect(() => {

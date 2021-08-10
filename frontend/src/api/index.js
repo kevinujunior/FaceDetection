@@ -66,16 +66,10 @@ export const postNewAuth = (data, history) => {
         console.log("Stored key locally");
       });
       history.push("/");
-      alert("Registration successful");
       window.location.reload();
     })
     .catch((error) => {
-      if (error.response.data.username) {
-        alert(error.response.data.username);
-      }
-      if (error.response.data.password1) {
-        alert(error.response.data.password1);
-      }
+      alert("Something went wrong, please try again");
     });
 };
 
@@ -98,14 +92,10 @@ export const postExistingAuth = (data, history) => {
         console.log("Stored key locally");
       });
       history.push("/");
-      alert("Logged in successfully");
-
       window.location.reload();
     })
     .catch((error) => {
-      for (var err in error.response.data.non_field_errors) {
-        alert(error.response.data.non_field_errors[err]);
-      }
+      alert("Something went wrong, please try again");
     });
 };
 

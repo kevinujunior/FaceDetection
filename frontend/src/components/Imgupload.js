@@ -7,7 +7,6 @@ const ImgUpload = () => {
   const [redirect, setRedirect] = useState(false);
   const [prevImg, setPrevImg] = useState("");
   var history = useHistory();
-
   useEffect(() => {
     history.replace("/upload");
   }, [history]);
@@ -28,12 +27,12 @@ const ImgUpload = () => {
       };
       let data = new FormData();
       data.append("photo", img, img.name);
-      const res = await axios.post(
-        "https://mamun-facedetector.herokuapp.com/images/images/",
-        data,
-        config
-      );
-      console.log(res);
+      // const res = await axios.post(
+      //   "https://mamun-facedetector.herokuapp.com/images/images/",
+      //   data,
+      //   config
+      // );
+      // console.log(res);
       setRedirect(true);
     } else {
       alert("Please provide an image");
@@ -50,12 +49,18 @@ const ImgUpload = () => {
           </div>
         ) : (
           <div className="imgUpload_show">
+            <p>{prevImg}</p>
             <img src={prevImg} alt="Preview" />
           </div>
         )}
       </div>
       <input type="submit" className="imgUpload_button" />
-      {redirect && <Redirect to="/response" />}
+      { redirect && <Redirect
+            to={{
+            pathname: "/response",
+            state: prevImg
+          }}
+        />}
     </form>
   );
 };
