@@ -58,7 +58,7 @@ const ImgUpload = () => {
       { redirect && <Redirect
             to={{
             pathname: "/response",
-            state: prevImg
+            state: {image: prevImg}
           }}
         />}
     </form>

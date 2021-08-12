@@ -1,0 +1,7 @@
+watermark
+normal
+blur
+cartoon
+glass
+id
+mask

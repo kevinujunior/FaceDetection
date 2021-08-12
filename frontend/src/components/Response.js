@@ -1,49 +1,15 @@
-import React, { useEffect , useState, useRef } from "react";
-import { Redirect,useHistory } from "react-router-dom";
-import {
-  Textfield,
-  Grid,
-  AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  IconButton,
-  Button,
-} from "@material-ui/core";
-import * as cocoSsd from "@tensorflow-models/coco-ssd";
+import React, { useEffect , useState } from "react";
+import { useHistory } from "react-router-dom";
+import * as automl from "@tensorflow/tfjs-automl"; 
 import * as tf from "@tensorflow/tfjs";
-import Webcam from "react-webcam";
 import loadingimage from './images/loading.gif'
+import { Button } from "@material-ui/core";
 
 function Response(props) {
   var history = useHistory();  
-  // useEffect(() => {
-  //   history.replace("/response");
-  // }, [history]);
-	const image = props.location.state;
+  const image = props.location.state.image;
   const [loadingString, setLoadingString]=useState("");
-  
-  const webcamRef = React.useRef(null);
-  const [videoWidth,setVideoWidth] = useState(960);
-  const [videoHeight,setVideoHeight] = useState(640);
-
   const [model,setModel] = useState();
-
-  async function loadModel() {
-    try{
-      console.log("model loading");
-      setLoadingString("model loading");
-      overlayOn();
-      const model = await cocoSsd.load();
-      setModel(model);
-      console.log("setloaded model");
-      overlayOff();
-    }catch(err){
-      console.log(err);
-      console.log("failed loading model");
-    }
-
-  }
 
   useEffect(() => {
     tf.ready().then(() => {
@@ -51,80 +17,60 @@ function Response(props) {
     } )
   },[]);
 
+  //LOAD MODEL
+  async function loadModel() {
+    const modelUrl = 'model/model.json'
+    try{
+      console.log("model loading");
+      setLoadingString("model loading");
+      overlayOn();
+      const modelautoml = await automl.loadImageClassification(modelUrl);
+      setModel(modelautoml);
+      console.log("setloaded model");
+      overlayOff();
+    }catch(err){
+      console.log(err);
+      console.log("failed loading model");
+    }
+  }
 
   // OVERLAY
   function overlayOn() {
     document.getElementById("overlay").style.display = "block";
   }
-
   function overlayOff() {
     document.getElementById("overlay").style.display = "none";
   }
 
-  //Prediction
+  //PREDICTION
   async function predictionFunction() {
-    const predictions = await model.detect(document.getElementById("img"));
 
-    var cnvs = document.getElementById("myCanvas");
-    var ctx = cnvs.getContext("2d");
-    ctx.clearRect(
-      0,
-      0,
-      "100vw",
-      "100vh"
-      );
-    if(predictions.length > 0) { //predictions.length represent no of objects
-      console.log(predictions)
-      setLoadingString("detecting image");
-      overlayOn();
-      for (let n = 0; n < predictions.length; n++){
-        console.log(n);
-        if(predictions[n].score > 0.8) {
-          // get the dimension of the box if prdiction> 0.8
-          let bboxLeft = predictions[n].bbox[0];
-          let bboxTop = predictions[n].bbox[1];
-          let bboxWidth = predictions[n].bbox[2];
-          let bboxHeight = predictions[n].bbox[3];
-
-          console.log("bboxLeft:"+bboxLeft);
-          console.log("bboxTop:"+bboxTop);
-          console.log("bboxWidth:"+bboxWidth);
-          console.log("bboxHeight:"+bboxHeight);
-
-          // draw
-          ctx.beginPath();
-          ctx.font = "28px Arial";
-          ctx.fillStyle = "red";
-
-          ctx.fillText(
-            predictions[n].class +
-            ": " +
-            Math.round(parseFloat(predictions[n].score)*100)+
-            "%",
-            bboxLeft,
-            bboxTop
-            );
-          ctx.rect(bboxLeft, bboxTop, bboxWidth, bboxHeight);
-          ctx.strokeStyle = "#FF0000";
-
-          ctx.lineWidth = 3;
-          ctx.stroke();
-
-          console.log("detected");
-        }
+    
+    const image = document.getElementById('img');
+    console.log("detecting image");
+    
+    const predictions = await model.classify(image);
+    console.log(predictions);
+    overlayOff();
+    // Traversing for Result
+    var result = 0;
+    var resultlabel ="";
+    for(var key in predictions){
+      if(predictions[key].prob>result){
+        result = predictions[key].prob;
+        resultlabel = predictions[key].label;
       }
-      overlayOff();
-      
     }
-    // setTimeout(() =>predictionFunction(), 500);
-  }
+    console.log(resultlabel,result);
 
-  const videoConstraints = {
-    height: 1080,
-    width: 1920,
-    maxWidth: "100vw",
-    facingMode: "environment",
-  };
+    // Show the resulting object on the page.
+    
+    const pre = document.getElementById('graph');
+    if(result>0.6)
+      pre.innerHTML = "<h2>Result : "+resultlabel+"</h2><span/><h2>Accuracy : "+result+"</h2>";
+    else
+      pre.innerHTML = "<h2>AI is not able to predict</h2>";
+   }
 
   return (
     <div>
@@ -147,41 +93,26 @@ function Response(props) {
               maxWidth: "250px",
             }}
             onClick={() => {
+              setLoadingString("detecting image");
+              overlayOn();
               predictionFunction();
               }}>
               Start Detect
           </Button>
           <div className="imgUpload_show">
-            <div style={{ position: "absolute", top: "30%", left: "30%", zIndex: "99",height:"100vh",width:"100vw"}}>
-              <canvas
-                id="myCanvas"
-                style={{backgroundColor: "transparent"}}
-              />
-            </div>
-            <div style={{ position: "absolute", top: "30%", left: "30%", height: "100vh", width: "100vw"}}>
-
+            <div style={{ position: "absolute", top: "30%", left: "5%", height: "100vh", width: "100vw"}}>
               <img 
                 src={image}
                 id="img"
                 alt="Response"/>
-              
             </div>
           </div>
+          <div id="graph" style={{ position: "absolute", top: "40%", left: "45%", height: "100vh", width: "50vw"}}>
+          </div>
+          
     </div>
     </div>
   );
 }
 
 export default Response;
-// <Webcam
-//                 audio={false}
-//                 id="img"
-//                 style={{
-//                   width: "70%",
-//                 }}
-//                 ref={webcamRef}
-//                 screenshotQuality={1}
-//                 screenshotFormat="image/jpeg"
-//                 videoConstraints={videoConstraints}
-//                 />
-
