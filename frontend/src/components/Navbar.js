@@ -35,7 +35,7 @@ const Navbar = () => {
       <div className="nav_container">
         <div className="nav_brand">
           <Link to="/" className="nav_link nav_logo">
-            Face Detection
+            mamun
           </Link>
           <input
             type="checkbox"

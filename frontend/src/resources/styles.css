@@ -11,12 +11,18 @@ body,
 html {
   margin: 0 0;
   height: 100%;
+  color: white;
 }
 
 /* App */
 
 .app {
   min-height: 100vh;
+  background-image: url(slanted-gradient.svg);
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: 100;
 }
 
 /*
@@ -25,7 +31,6 @@ html {
 
 .nav_header {
   width: 100%;
-  border-bottom: 4px solid #7700ff;
 }
 
 .nav_container {
@@ -38,29 +43,38 @@ html {
 }
 
 .nav_link {
-  color: rgb(0, 0, 0);
+  color: #fff;
   text-decoration: none;
-  text-transform: uppercase;
+  display: block;
+  padding: 10px 15px;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.144);
+  border-radius: 5px;
+  text-align: center;
 }
 .nav_link:hover {
-  color: #7700ff;
-  text-decoration: underline;
+  background-color: rgb(85, 0, 0);
+  color: red;
 }
 
 .nav_active {
-  color: #7700ff;
+  background-color: rgb(85, 0, 0);
+  color: red;
   font-weight: 600;
 }
 
 .nav_logo {
-  font-size: 1.1rem;
+  background-color: transparent;
+  font-size: 1.5rem;
   font-weight: 600;
-  letter-spacing: 2px;
-  color: #7700ff;
+  font-family: consolas;
+  color: #fff;
 }
 
 .nav_logo:hover {
+  background-color: transparent;
   text-decoration: none;
+  color: red;
 }
 
 .nav_header ul {
@@ -93,7 +107,7 @@ html {
 }
 
 .home_btn {
-  background-color: #7700ff;
+  background-color: rgba(255, 255, 255, 0.144);
   text-decoration: none;
   color: white;
   font-size: 1.1rem;
@@ -103,6 +117,12 @@ html {
   cursor: pointer;
   border-radius: 5px;
   text-align: center;
+  height: fit-content;
+}
+
+.home_btn:hover {
+  color: red;
+  background-color: rgb(85, 0, 0);
 }
 
 /* Login */
@@ -115,12 +135,14 @@ html {
 }
 
 .login {
+  color: white;
   width: 400px;
   margin: 0 auto;
-  padding: 20px 30px 10px 30px;
-  background-color: rgb(233, 233, 233);
+  padding: 20px 30px 25px 30px;
+  border: 3px solid white;
+  border-radius: 10px;
   text-align: center;
-  box-shadow: 10px 10px 0px #5900bf;
+  box-shadow: 10px 10px 0px #fff;
 }
 
 .auth {
@@ -132,7 +154,7 @@ html {
 
 .login h2 {
   margin: 20px 0 40px 0;
-  color: #7700ff;
+  color: #fff;
   text-transform: uppercase;
 }
 
@@ -150,34 +172,37 @@ html {
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
+  color: black;
 }
 
 .login form input {
-  outline-color: #7700ff;
+  outline-color: red;
 }
 
 .login form button {
   outline: none;
   background-color: white;
-  border: 2px solid #7700ff;
-  color: #7700ff;
+  border: 2px solid white;
+  color: black;
   cursor: pointer;
   /* margin-bottom: 0 !important; */
 }
 
 .login form button:hover {
-  background-color: #7700ff;
+  background-color: rgb(85, 0, 0);
+  border: 2px solid red;
   color: white;
 }
 
 /* Image Upload */
 .imgUpload {
-  width: 800px;
+  max-width: 800px;
   margin: 0 auto;
   height: 90vh;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  padding: 0 10px;
 }
 
 .imgUpload_img {
@@ -194,10 +219,11 @@ html {
   justify-content: center;
   width: 300px;
   height: 200px;
-  border: 5px dashed #7700ff;
+  border: 5px dashed red;
   padding: 10px;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   cursor: pointer;
+  color: white;
 }
 
 .imgUpload_show {
@@ -209,36 +235,27 @@ html {
   max-height: 400px;
   object-fit: contain;
   transition: box-shadow 0.5s;
-  box-shadow: 10px 10px 0px #5900bf;
+  border-radius: 10px;
+  box-shadow: 10px 10px 0px #fff;
 }
 
 .imgUpload_show img:hover {
   box-shadow: none;
 }
 
-.imgUpload_button {
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 10px 24px;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  background-color: white;
-  border: 2px solid #7700ff;
-  color: #7700ff;
-  cursor: pointer;
-}
-
-.imgUpload_button:hover {
-  background-color: #7700ff;
+/* Response */
+.response {
+  max-width: 740px;
+  margin: 100px auto;
   color: white;
 }
 
-/* Response */
-.response {
-  max-width: 800px;
-  margin: 0 auto;
+.response_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
 #overlay {
   position: fixed;
   display: none;
@@ -248,18 +265,18 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
   cursor: pointer;
 }
-#overlay_image{
+#overlay_image {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }
-#overlay_text{
+#overlay_text {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -267,9 +284,10 @@ html {
   font-size: 40px;
   font-weight: 400;
   color: white;
-  transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }
+
 /* About */
 .about {
   max-width: 800px;
@@ -294,7 +312,7 @@ html {
 }
 
 .social i:hover {
-  color: #7700ff;
+  color: #fff;
   cursor: pointer;
 }
 

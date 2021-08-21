@@ -54,13 +54,15 @@ const ImgUpload = () => {
           </div>
         )}
       </div>
-      <input type="submit" className="imgUpload_button" />
-      { redirect && <Redirect
-            to={{
+      <input type="submit" className="home_btn" />
+      {redirect && (
+        <Redirect
+          to={{
             pathname: "/response",
-            state: {image: prevImg}
+            state: { image: prevImg },
           }}
-        />}
+        />
+      )}
     </form>
   );
 };
